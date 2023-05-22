@@ -1,11 +1,13 @@
-import { useState } from 'react'
 import './App.css'
+import Titulo from './components/Titulo/Titulo'
+import InsertItens from './components/InsertItens/InsertItens'
 
 function App() {
 
   return (
-    <div>
-      <h1>teste</h1>
+    <div className='container'>
+      <Titulo title={'Lista de Compras:'}/>
+      <InsertItens />
     </div>
   )
 }
