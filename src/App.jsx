@@ -1,12 +1,11 @@
 import './App.css'
-import Titulo from './components/Titulo/Titulo'
 import InsertItens from './components/InsertItens/InsertItens'
 
 function App() {
 
   return (
     <div className='container'>
-      <Titulo title={'Lista de Compras:'}/>
+      <h1 style={{padding: '0 10px', backgroundColor: 'lightgray', borderRadius: '5px'}}>Lista de Compras:</h1>
       <InsertItens />
     </div>
   )

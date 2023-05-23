@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import BotaoAdicionar from "../BotaoAdicionar/BotaoAdicionar";
 
 export default function InsertItens() {
     const stylesDivList = {
         margin: '10px 0',
         padding: '5px 5px 5px 25px',
-        // padding: '5px 7px',
         fontSize: '1.2rem',
-        // border: '1px solid black',
-        // borderRadius: '5px',
-        minHeight: '10rem',
+        height: '10rem',
+        overflow: 'auto',
     }
 
     const stylesDiv = {
@@ -29,6 +27,8 @@ export default function InsertItens() {
         marginBottom: '0.5rem',
     }
 
+    const divListRef = useRef()
+
     const [itens, setItens] = useState({
         itensLista: ''
     });
@@ -37,17 +37,12 @@ export default function InsertItens() {
 
     return (
         <div>
-            <div id="itensLista" style={stylesDivList}>
+            <div style={stylesDivList} ref={divListRef}>
                 <ul>
                     {compras.map((compra) => (
                         <li>{compra.itensLista}</li>
                     ))}
                 </ul>
-                
-                {/* {compras.map((compra) => (
-                    <li>{compra.itensLista}</li>
-                ))} */}
-
             </div>
             <form 
                 action=""
@@ -56,6 +51,8 @@ export default function InsertItens() {
                     if (itens.itensLista != '') {
                         event.preventDefault();
                         setCompras([...compras, itens]);
+                        setItens({...itens, itensLista: ''})
+                        divListRef.current.scrollTop = divListRef.current.scrollHeight
                     } else {
                         alert('É necessário digitar algo')
                         event.preventDefault()
