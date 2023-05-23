@@ -1,17 +1,17 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import BotaoAdicionar from "../BotaoAdicionar/BotaoAdicionar";
 
 export default function InsertItens() {
     const stylesDivList = {
         margin: '10px 0',
-        padding: '5px 10px',
+        padding: '5px 5px 5px 25px',
+        // padding: '5px 7px',
         fontSize: '1.2rem',
         // border: '1px solid black',
         // borderRadius: '5px',
         minHeight: '10rem',
     }
-    
+
     const stylesDiv = {
         display: 'flex',
         flexDirection: 'column',
@@ -29,24 +29,52 @@ export default function InsertItens() {
         marginBottom: '0.5rem',
     }
 
-    const [valorInput, setValorInput] = useState('');
+    const [itens, setItens] = useState({
+        itensLista: ''
+    });
+
+    const [compras, setCompras] = useState([]);
 
     return (
         <div>
             <div id="itensLista" style={stylesDivList}>
-                <li>{valorInput}</li>
+                <ul>
+                    {compras.map((compra) => (
+                        <li>{compra.itensLista}</li>
+                    ))}
+                </ul>
+                
+                {/* {compras.map((compra) => (
+                    <li>{compra.itensLista}</li>
+                ))} */}
+
             </div>
-            <div style={stylesDiv}>
-                <label>Adicionar Novo Item na Lista:</label>
-                <input
-                    type="text" 
-                    id="userInput"
-                    value={valorInput}
-                    style={stylesInputText}
-                    onChange={(event) => setValorInput(event.target.value)}
-                />
-                <BotaoAdicionar />
-            </div>
+            <form 
+                action=""
+                method="post"
+                onSubmit={(event) => {
+                    if (itens.itensLista != '') {
+                        event.preventDefault();
+                        setCompras([...compras, itens]);
+                    } else {
+                        alert('É necessário digitar algo')
+                        event.preventDefault()
+                    }
+                }}>
+
+
+                <div style={stylesDiv}>
+                    <label>Adicionar Novo Item na Lista:</label>
+                    <input
+                        type="text"
+                        id="teste"
+                        value={itens.itensLista}
+                        style={stylesInputText}
+                        onChange={(event) => setItens({...itens, itensLista: event.target.value})}
+                    />
+                    <BotaoAdicionar />
+                </div>
+            </form>
         </div>
     )
 }
